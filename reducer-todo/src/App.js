@@ -4,7 +4,7 @@ import './App.css';
 import TaskList from './components/TaskList'
 function App() {
   const [newTask, setNewTask] = useState('')
-  const [{ tasks }, dispatch] = useReducer(reducer, initialState)
+  const [{ state }, dispatch] = useReducer(reducer, initialState)
 
   const changeHandler = e => {
     setNewTask(e.target.value)
@@ -16,6 +16,9 @@ function App() {
     setNewTask('') 
   }
 
+  const markCompleted = (task) => {
+    dispatch({type: 'MARK_COMPLETED', payload: task.id})
+  }
   return (
     <div className="App">
       <h1>Reducer Todo List</h1>
@@ -29,7 +32,7 @@ function App() {
         />
         <button type='submit'>Add Task</button>
       </form>
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={state} markCompleted={markCompleted}/>
     </div>
   );
 }

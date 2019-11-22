@@ -5,7 +5,7 @@ const TaskList = (props) => {
   return (
     <div>
       {props.tasks.map(task => {
-        return <Task task={task.item}/>
+        return <Task key={task.id} task={task.item} markCompleted={props.markCompleted}/>
       })}
     </div>
   )

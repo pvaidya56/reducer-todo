@@ -13,9 +13,20 @@ export const initialState = []
       case 'MARK_COMPLETED':
           return state.map(task => {
               if (task.id === action.payload) {
+                  console.log(task)
                   return {...task, completed: !task.completed}
-              } else return task
+              } else return {...task}
           })
+      case 'CLEAR_COMPLETED':
+         const completedTasks = state.filter(task => {
+             return task.completed === false
+         })
+         return completedTasks
+
+      case 'DELETE_TASK':
+      return state.filter(task => {
+        return task.id !== action.payload 
+      })
       default: return state
     }
   }
